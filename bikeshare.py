@@ -14,18 +14,18 @@ def check_user_inputs(input_str,input_check):
     while True: #keep asking the user for an input until the input matches the requirments
         input_string=input(input_str)
         try: # this to make sure the code will not run a error also that the input data are the same for each list
-            if input_string.lower() in ['chicago','new york','washington'] and input_check == first:
+            if input_string.lower() in ['chicago','new york','washington'] and input_check == 1:
                 break
-            elif input_string.lower() in ['january', 'february', 'march', 'april', 'may', 'june','all'] and input_check == second:
+            elif input_string.lower() in ['january', 'february', 'march', 'april', 'may', 'june','all'] and input_check == 2:
                 break
-            elif input_string.lower() in ['sunday','monday','tuesday','wednesday','thursday','friday','saturday','all'] and input_check == third:
+            elif input_string.lower() in ['sunday','monday','tuesday','wednesday','thursday','friday','saturday','all'] and input_check == 3:
                 break
             else:
-                if input_check == first:
+                if input_check == 1:
                     print("Sorry, your input should be one of the following cities: chicago, new york city ,or washington")
-                if input_check == second :
+                if input_check == 2 :
                     print("Sorry, your input should be one of the following months: january, february, march, april, may, june , all ")
-                if input_check == third :
+                if input_check == 3 :
                     print("Sorry, your input should be: sunday, ... friday, saturday or all")
         except ValueError:
             print("Sorry, your input is incorrect can you please try again")
@@ -46,13 +46,13 @@ def get_filters():
 
 
 
-    city = check_inputs("Would you like to see the data for chicago, new york city or washington?",1)
+    city = check_user_inputs("Would you like to see the data for chicago, new york city or washington?",1)
 
     # get user input for month (all, january, february, ... , june)
-    month = check_inputs("Which Month (all, january, ... june)?",2)
+    month = check_user_inputs("Which Month (all, january, ... june)?",2)
 
     # get user input for day of week (all, monday, tuesday, ... sunday)
-    day = check_inputs("Which day? (all, monday, tuesday, ... sunday)",3)
+    day = check_user_inputs("Which day? (all, monday, tuesday, ... sunday)",3)
     print('-'*40)
     return city, month, day
 
