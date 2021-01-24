@@ -191,35 +191,35 @@ def user_stats(df,city):
 
 def display_data(df):
     ''' this function display 5 rows of data from the csv file for the selected city.'''
-    BIN_RESPONSE_LIST = ['yes', 'no']
-    sdata = ''
+    RESPONSE_LIST = ['yes', 'no']
+    user_response = ''
     #counter variable is initialized as a tag to ensure only details from
     #a particular point is displayed
     counter = 0
-    while sdata not in BIN_RESPONSE_LIST:
+    while user_response not in RESPONSE_LIST:
         print("\nDo you wish to view the raw data?")
         print("\nAccepted responses:\nYes or yes\nNo or no")
-        sdata = input().lower()
+        user_response = input().lower()
         #the raw data from the df is displayed if user opts for it
-        if sdata == "yes":
+        if user_response == "yes":
             print(df.head())
-        elif sdata not in BIN_RESPONSE_LIST:
+        elif user_response not in RESPONSE_LIST:
             print("\nPlease check your input.")
             print("Input does not seem to match any of the accepted responses.")
             print("\nRestarting...\n")
 
     #Extra while loop here to ask user if they want to continue viewing data
-    while sdata == 'yes':
+    while user_response == 'yes':
         print("Do you wish to view more raw data?")
         counter += 5
-        sdata = input().lower()
+        user_response = input().lower()
         #If user opts for it, this displays next 5 rows of data
-        if sdata == "yes":
+        if user_response == "yes":
              print(df[counter:counter+5])
-        elif sdata != "yes":
+        elif user_response != "yes":
              break
 
-    print('-'*80)
+    print('-'*40)
 
 
 def main():
