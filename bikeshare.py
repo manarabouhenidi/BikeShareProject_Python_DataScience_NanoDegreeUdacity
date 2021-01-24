@@ -12,7 +12,7 @@ def check_user_inputs(input_str,input_check):
 # HINT: Use a while loop to handle invalid inputs
 
     while True: #keep asking the user for an input until the input matches the requirments
-        input_string=input(input_str)
+        input_string=input(input_str).lower()
         try: # this to make sure the code will not run a error also that the input data are the same for each list
             if input_string.lower() in ['chicago','new york','washington'] and input_check == 1:
                 break
@@ -32,7 +32,7 @@ def check_user_inputs(input_str,input_check):
     return input_string
 
 def get_filters():
-    # this functin asks the user ti specify a city, month and day to analyze.
+    # this functin asks the user to specify a city, month and day to analyze.
     """
     Asks user to specify a city, month, and day to analyze.
 
@@ -43,8 +43,6 @@ def get_filters():
     """
     print('Hello! Let\'s explore some US bikeshare data!')
     print('Please Enter name of the City, Month and Day')
-
-
 
     city = check_user_inputs("Would you like to see the data for chicago, new york city or washington?",1)
 
@@ -191,6 +189,38 @@ def user_stats(df,city):
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
+def display_data(df):
+    ''' this function display 5 rows of data from the csv file for the selected city.'''
+    BIN_RESPONSE_LIST = ['yes', 'no']
+    sdata = ''
+    #counter variable is initialized as a tag to ensure only details from
+    #a particular point is displayed
+    counter = 0
+    while sdata not in BIN_RESPONSE_LIST:
+        print("\nDo you wish to view the raw data?")
+        print("\nAccepted responses:\nYes or yes\nNo or no")
+        sdata = input().lower()
+        #the raw data from the df is displayed if user opts for it
+        if sdata == "yes":
+            print(df.head())
+        elif sdata not in BIN_RESPONSE_LIST:
+            print("\nPlease check your input.")
+            print("Input does not seem to match any of the accepted responses.")
+            print("\nRestarting...\n")
+
+    #Extra while loop here to ask user if they want to continue viewing data
+    while sdata == 'yes':
+        print("Do you wish to view more raw data?")
+        counter += 5
+        sdata = input().lower()
+        #If user opts for it, this displays next 5 rows of data
+        if sdata == "yes":
+             print(df[counter:counter+5])
+        elif sdata != "yes":
+             break
+
+    print('-'*80)
+
 
 def main():
     while True:
@@ -201,6 +231,7 @@ def main():
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df,city)
+        display_data(df)
 
         #this to keep asking the user
         restart = input('\nWould you like to restart? Enter yes or no.\n')
